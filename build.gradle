@@ -32,3 +32,16 @@ dependencies {
     compileOnly('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+task yarnInstall(type:Exec) {
+    workingDir './src/main/js'
+    commandLine 'yarn', 'install'
+}
+
+task yarnBuild(type:Exec) {
+    workingDir './src/main/js'
+    commandLine './node_modules/.bin/vue-cli-service', 'build'
+}
+
+yarnBuild.dependsOn yarnInstall
+processResources.dependsOn yarnBuild
