@@ -33,13 +33,26 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-task yarnInstall(type:Exec) {
-    commandLine 'yarn', 'install'
+task yarnInstall << {
+    'yarn install'.execute().waitForProcessOutput(System.out, System.err)
 }
 
-task yarnBuild(type:Exec) {
-    commandLine 'yarn', 'build'
+task yarnBuild << {
+    'yarn build'.execute().waitForProcessOutput(System.out, System.err)
 }
+
+task yarnServe << {
+    String activeProfile = System.properties['spring.profiles.active']
+    if (activeProfile == null || 'dev') {
+        'yarn serve'.execute()
+    } else {
+        tasks.yarnBuild.execute()
+    }
+}
+
+
 
 yarnBuild.dependsOn yarnInstall
-processResources.dependsOn yarnBuild
+yarnServe.dependsOn yarnInstall
+bootJar.dependsOn yarnBuild
+bootRun.dependsOn yarnServe
