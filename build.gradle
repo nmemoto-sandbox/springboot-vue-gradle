@@ -34,13 +34,11 @@ dependencies {
 }
 
 task yarnInstall(type:Exec) {
-    workingDir './src/main/js'
     commandLine 'yarn', 'install'
 }
 
 task yarnBuild(type:Exec) {
-    workingDir './src/main/js'
-    commandLine './node_modules/.bin/vue-cli-service', 'build'
+    commandLine 'yarn', 'build'
 }
 
 yarnBuild.dependsOn yarnInstall
