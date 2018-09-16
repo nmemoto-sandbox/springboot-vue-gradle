@@ -1,29 +1,29 @@
-# springboot-vue
+# springboot-vue-gradle
+Vue.js (Vue CLI 3 でプロジェクト作成) を含んだ Spring Boot のプロジェクトを gradle でビルドする場合のサンプルプロジェクト
 
-## Spring Boot
-// TODO
+## Spring Boot と Vue.js の両方のビルド等の処理実行方法
+gradle の bootJar/bootRun タスク実行で Vue.js 部分の処理を実行するようにしている(build.gradle 参照)
 
-## Vue.js 
+## Vue.js 部分のみのビルド等の処理実行方法
 ### Project setup
 ```
-cd src/main/js
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-cd src/main/js
-yarn run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
 ```
-cd src/main/js
 yarn run build
 ```
 
 ### Lints and fixes files
 ```
-cd src/main/js
 yarn run lint
 ```
+
+### Vue.js のビルド設定
+vue.config.js に、ビルドファイルの出力先設定と、ビルド対象ファイルの設定を記載した
